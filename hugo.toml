@@ -1,0 +1,4 @@
+baseURL = 'https://hewriteme.github.io/'
+languageCode = 'en-us'
+title = 'HeWriteMe'
+theme = 'hugo-book'
