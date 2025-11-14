@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: light dark;
+}
+
+body {
+    border-top: 5px solid #002e63;
+    font-family: system-ui;
+    font-size: 1.5rem;
+    line-height: 1.75;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+    opacity: 0.8;
+}
+
+main {
+    margin-inline: auto;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    max-width: min(70ch, 100% - 4rem);
+}
+
+header, article, footer {
+    width: 100%;
+}
+
+header {
+    border-bottom: 1px solid #a9a9a9;    
+    display: inline-block;
+    padding-bottom: 7px;
+    padding-right: 10px;
+    width: auto;
+}
+
+header h1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    justify-content: flex-start;
+}
+
+header h1 .sectionTitle {
+    padding-right: 10px;
+}
+
+.overview {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin: 1rem 0;
+}
+
+article {
+    padding-bottom: 1em;    
+}
+
+article p {
+    font-size: clamp(1.2rem, calc(1.15rem + .26vw), 1.35rem);
+    margin-block-start: 1em;
+    max-width: 70ch;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    margin: 20px 0 15px 0;
+    padding: 0;
+}
+
+ul li {
+    box-sizing: border-box;
+    display: inline-block;
+    flex: 1 1 250px;
+    text-align: center;
+}
+
+ul li a {
+    background-color: #d4d4d8;    
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #27272A;
+    display: block;
+    height: 100%;
+    padding: 10px 20px 25px 20px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+
+ul li a:after {
+    bottom: 35%;
+    color: #808080;
+    content: "\2192";
+    font-size: 17px;
+    position: absolute;
+    right: 15px;
+}
+
+ul li a:hover, ul li a:focus, ul li a:active {
+    background-color: #fafafa;
+    opacity: 1;
+}
+
+ul li a h2 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    margin: 0.5rem 0;
+}
+
+ul li a p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.dream-date {
+    font-size: 14px;
+    color: #d3d3d3;
+    text-transform: uppercase;
+}
+
+.dream-date:before {
+    content: "\2014\00a0";
+}
+
+.dream-date:after {
+    content: "\00a0\2014";
+}
+
+footer {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+footer a {
+    white-space: nowrap;
+}
