@@ -2,13 +2,17 @@ import os
 import re
 import sys
 from datetime import datetime
+from labels import format_label
+from pathlib import Path
 from string import Template
 
 if len(sys.argv) < 2:
     print("Usage: python deploy.py <filename>")
     sys.exit(1)
 
-filename = sys.argv[1]
+current_year = datetime.now().year    
+
+filename = str(Path.home()) + '/' + sys.argv[1]
 
 full_path = os.path.dirname(os.path.abspath((filename)))
 base_path = full_path.partition("/txt/")[0]
@@ -27,7 +31,7 @@ if section_path:
         if subfolder != section_path[0]:
             head_title += ' &gt; '
             head_title += subfolder_formatted
-            page_title += ' &gt; <a href="' + path_so_far + subfolder + '/">' +    subfolder_formatted + '</a>'
+            page_title += ' &gt; <a href="' + path_so_far + subfolder + '/">' + subfolder_formatted + '</a>'
         path_so_far += subfolder + '/'
 
 date, summary, title = None, None, None
@@ -69,7 +73,7 @@ with open(base_path + '/templates/webpage.html', 'r') as f:
 
 template = Template(template_content)
 
-result = template.substitute(content=content, datecreated=datecreated, datemodified=datemodified, description=description, head_title=head_title, page_title=page_title, title=title)
+result = template.substitute(content=content, datecreated=datecreated, datemodified=datemodified, description=description, head_title=head_title, page_title=page_title, title=title, current_year=current_year)
 
 filename = os.path.basename(filename)
 
