@@ -13,7 +13,11 @@ def deploy_index():
         if section_index[i].startswith("* "):
             link_title = section_index[i].removeprefix("* ").strip()
             link_summary = section_index[i+1].removeprefix("** ").strip()
-            link_url = '/' + section_index[i+2].removeprefix("** ").strip() + '/'
+            link_path = section_index[i+2].removeprefix("** ").strip()
+            if link_path.endswith("html"):
+                link_url = '/' + section_index[i+2].removeprefix("** ").strip()                                
+            else:
+                link_url = '/' + section_index[i+2].removeprefix("** ").strip() + '/'
             content += f'        <li><a href="{link_url}"><h2>{link_title}</h2><p>{link_summary}</p></a></li>\n'
         elif section_index[i].startswith("#+DESCRIPTION: "):
             description = section_index[i].removeprefix("#+DESCRIPTION: ").strip()

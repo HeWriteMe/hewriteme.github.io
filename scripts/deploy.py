@@ -10,16 +10,25 @@ if len(sys.argv) < 2:
 
 filename = sys.argv[1]
 
-folder = os.path.basename(os.path.dirname(os.path.abspath((filename))))
+full_path = os.path.dirname(os.path.abspath((filename)))
+base_path = full_path.partition("/txt/")[0]
+folder = full_path.partition("/txt/")[2]
+if base_path.endswith("/txt"):
+    base_path = base_path.removesuffix("/txt")
 
-if(folder == 'txt'):
-    folder = ''
+section_path = folder.split('/')
+head_title = ''
+page_title = ''
+path_so_far = '/'
 
-section = ''
-sectionlink = ''
-if(folder == 'dreams'):
-    section = 'Dreams'    
-    sectionlink = f'<a href="/{folder}/">Dreams</a> &gt; '
+if section_path:
+    for subfolder in section_path:
+        subfolder_formatted = subfolder.replace("-", " ").title()
+        if subfolder != section_path[0]:
+            head_title += ' &gt; '
+            head_title += subfolder_formatted
+            page_title += ' &gt; <a href="' + path_so_far + subfolder + '/">' +    subfolder_formatted + '</a>'
+        path_so_far += subfolder + '/'
 
 date, summary, title = None, None, None
 
@@ -51,16 +60,16 @@ content = '\n'.join(content_lines)
 
 content = '\n<p>' + re.sub(r'\n{2,}', '</p>\n\n<p>', content.strip()) + '</p>\n'
 
-if(section == 'Dreams'):
+if(folder.startswith("dreams/")):
     dt = datetime.strptime(datecreated, '%Y-%m-%d')
     content += '<p class="dream-date">' + dt.strftime('%d %B %Y') + '</p>'
 
-with open(os.path.expanduser('~/.hewriteme/') + 'templates/webpage.html', 'r') as f:
+with open(base_path + '/templates/webpage.html', 'r') as f:
     template_content = f.read()
 
 template = Template(template_content)
 
-result = template.substitute(content=content, datecreated=datecreated, datemodified=datemodified, description=description, section=section, sectionlink=sectionlink, title=title)
+result = template.substitute(content=content, datecreated=datecreated, datemodified=datemodified, description=description, head_title=head_title, page_title=page_title, title=title)
 
 filename = os.path.basename(filename)
 
@@ -69,5 +78,5 @@ if filename.endswith(".txt"):
 else:
     outputfile = filename
 
-with open(os.path.expanduser('~/.hewriteme/docs/') + folder + '/' + outputfile + '.html', 'w') as f:
+with open(base_path + '/docs/' + folder + '/' + outputfile + '.html', 'w') as f:
     f.write(result)

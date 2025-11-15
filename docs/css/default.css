@@ -67,6 +67,7 @@ article {
 
 article p {
     font-size: clamp(1.2rem, calc(1.15rem + .26vw), 1.35rem);
+    font-size: clamp(1.15rem, calc(1.1rem + 0.3vw), 1.3rem);
     margin-block-start: 1em;
     max-width: 70ch;
 }
