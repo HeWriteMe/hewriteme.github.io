@@ -27,7 +27,7 @@ path_so_far = '/'
 
 if section_path:
     for subfolder in section_path:
-        subfolder_formatted = subfolder.replace("-", " ").title()
+        subfolder_formatted = format_label(subfolder)
         if not subfolder_formatted.strip() == "":
             head_title += ' &gt; '
             head_title += subfolder_formatted
