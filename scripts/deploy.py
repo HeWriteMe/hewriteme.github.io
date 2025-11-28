@@ -28,7 +28,7 @@ path_so_far = '/'
 if section_path:
     for subfolder in section_path:
         subfolder_formatted = subfolder.replace("-", " ").title()
-        if subfolder != section_path[0]:
+        if not subfolder_formatted.strip() == "":
             head_title += ' &gt; '
             head_title += subfolder_formatted
             page_title += ' &gt; <a href="' + path_so_far + subfolder + '/">' + subfolder_formatted + '</a>'
@@ -58,11 +58,19 @@ with open(filename, 'r') as file:
         if recording:
             if line.startswith('==='):
                 break
+            if line.startswith('## '):
+                line = line.replace('## ', '<h2>') + '</h2>'
+            if line.startswith('*****'):
+                line = '<hr />'
+            line = line.replace('--', '&mdash;')
             content_lines.append(line.rstrip('\n'))
 
 content = '\n'.join(content_lines)
 
 content = '\n<p>' + re.sub(r'\n{2,}', '</p>\n\n<p>', content.strip()) + '</p>\n'
+content = content.replace('<p><hr /></p>', '<hr />')
+content = content.replace('<p><h2>', '<h2>')
+content = content.replace('</h2></p>', '</h2>')
 
 if(folder.startswith("dreams/")):
     dt = datetime.strptime(datecreated, '%Y-%m-%d')

@@ -1,16 +1,16 @@
 #+DESCRIPTION: Random thoughts and musings.
+* Books
+** Comments on literature.
+** lit
 * Dreams
 ** Nightly adventures.
 ** dreams
-* Books
-** Comments on literature.
-** books
 * Films
 ** Comments on movies.
 ** films
 * Regrets
 ** Things I wish I'd never done.
 ** regrets
-* Predictions
-** Prophecies of things to come.
-** predictions
+* Theories
+** Speculations about the ways of the world.
+** theories
